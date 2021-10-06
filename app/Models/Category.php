@@ -14,4 +14,9 @@ class Category extends Model
         'category_name',
         
     ];
+
+    //Eloquent ORM, Connecting the tables with a one-to-one relationship
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

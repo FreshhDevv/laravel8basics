@@ -94,4 +94,14 @@ class CategoryController extends Controller
         $delete = Category::find($id)->delete();
         return Redirect()->back()->with('success', 'Category Moved To Trash Successfully');
     }
+
+    public function Restore($id) {
+        $delete = Category::withTrashed()->find($id)->restore();
+        return Redirect()->back()->with('success', 'Category Restored Successfully');
+    }
+
+    public function Delete($id) {
+        $delete = Category::onlyTrashed()->find($id)->forceDelete();
+        return Redirect()->back()->with('success', 'Category Deleted Successfully');
+    }
 }

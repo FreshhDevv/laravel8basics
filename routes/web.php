@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,10 @@ Route::get('/softdelete/category/{id}', [CategoryController::class, 'SoftDelete'
 Route::get('/category/restore/{id}', [CategoryController::class, 'Restore']);
 
 Route::get('/delete/category/{id}', [CategoryController::class, 'Delete']);
+
+/// Brand Routes ///
+
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

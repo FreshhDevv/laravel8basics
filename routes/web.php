@@ -60,6 +60,8 @@ Route::post('/brand/add',[BrandController::class, 'StoreBrand'])->name('store.br
 
 Route::get('/brand/edit/{id}', [BrandController::class, 'Edit']);
 
+Route::post('/brand/update/{id}', [BrandController::class, 'Update']);
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     // $users = User::all();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redirect;
+use Image;
 
 class BrandController extends Controller
 {
@@ -64,12 +65,16 @@ class BrandController extends Controller
 //If a new image is selected, update the brand name and the image.
     if($brand_image){
 
-        $name_gen = hexdec(uniqid());
-        $img_ext = strtolower($brand_image->getClientOriginalExtension());
-        $img_name = $name_gen.'.'.$img_ext;
-        $up_location = 'image/brand/';
-        $last_img = $up_location.$img_name;
-        $brand_image -> move($up_location,$img_name);
+        // $name_gen = hexdec(uniqid());
+        // $img_ext = strtolower($brand_image->getClientOriginalExtension());
+        // $img_name = $name_gen.'.'.$img_ext;
+        // $up_location = 'image/brand/';
+        // $last_img = $up_location.$img_name;
+        // $brand_image -> move($up_location,$img_name);
+
+        $name_gen = hexdec(uniqid()).'.'.$brand_image->getClientOriginalExtension();
+        Image::make($brand_image)->resize(300,200)->save('image/brand'.$name_gen);
+        $last_img = 'image/brand'.$name_gen;
 
         unlink($old_image);
         Brand::find($id)->update([
@@ -78,7 +83,7 @@ class BrandController extends Controller
             'created_at' => Carbon::now()
         ]);
         return Redirect() -> back() -> with('success', 'Brand Updated Successfully');
-        
+
 //Else if no new image is selected, update just the brand name.
     } else {
         Brand::find($id)->update([
@@ -89,10 +94,15 @@ class BrandController extends Controller
         return Redirect() -> back() -> with('success', 'Brand Updated Successfully');
 
     }
+    }
 
+    public function Delete($id) {
+        $image = Brand::find($id);
+        $old_image = $image->brand_image;
+        unlink($old_image);
 
-    
-
+        Brand::find($id)->delete();
+        return Redirect()->back()->with('success', 'Brand Deleted Successfully');
     }
 }
 

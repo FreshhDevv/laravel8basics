@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Multipic;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Image;
+use Intervention\Image\Facades\Image;
+
 
 class BrandController extends Controller
 {
@@ -149,5 +151,10 @@ class BrandController extends Controller
             ]);
         }
         return Redirect()->back()->with('success', 'Brand Inserted Successfully');
+    }
+
+    public function Logout() {
+        Auth::logout();
+        return Redirect()->route('login')->with('success', 'User Logout');
     }
 }

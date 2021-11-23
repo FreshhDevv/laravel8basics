@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Models\Multipic;
 use App\Models\User;
@@ -75,6 +76,13 @@ Route::get('/brand/delete/{id}', [BrandController::class, 'Delete']);
 Route::get('/multi/image', [BrandController::class, 'Multipic'])->name('multi.image');
 
 Route::post('/multi/add', [BrandController::class, 'StoreImage'])->name('store.image');
+
+//All Admin Routes
+
+Route::get('/home/slider', [HomeController::class, 'HomeSlider'])->name('home.slider');
+
+
+
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

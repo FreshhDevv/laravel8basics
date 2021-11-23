@@ -6,7 +6,11 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+
+            <h4>Home Slider</h4>
+            <a href="" class=""><button class="btn btn-info">Add Slider</button></a>
+            <br><br>
+                <div class="col-md-12">
                     <div class="card">
 
                         @if(session('success'))

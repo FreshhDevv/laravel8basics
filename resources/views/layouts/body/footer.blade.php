@@ -61,7 +61,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/company-free-html-bootstrap-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">FreshDev</a>
+      Designed by <a href="https://www.linkedin.com/in/billy-hans-99a7281b4">FreshDev</a>
     </div>
   </div>
   <div class="social-links text-center text-md-right pt-3 pt-md-0">

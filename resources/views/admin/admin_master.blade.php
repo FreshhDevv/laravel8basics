@@ -193,7 +193,7 @@
                 &copy; <span id="copy-year">2019</span> Copyright Website by
                 <a
                   class="text-primary"
-                  href="http://www.iamabdus.com/"
+                  href="https://www.linkedin.com/in/billy-hans-99a7281b4"
                   target="_blank"
                   >FreshDev</a
                 >.

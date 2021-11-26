@@ -15,10 +15,10 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        
     }
 
-    public function AllCat() {
+    public function AllCat()
+    {
         //Query Builder
 
         // $categories = DB::table('categories')
@@ -27,7 +27,7 @@ class CategoryController extends Controller
         //     ->latest()->paginate(5);
 
         //$categories = DB::table('categories')->latest()->paginate(5);
-        
+
         //Eloquent ORM Reading Data
 
         $categories = Category::latest()->paginate(5);
@@ -35,24 +35,27 @@ class CategoryController extends Controller
         return view('admin.category.index', compact('categories', 'trashCat'));
     }
 
-    public function AddCat(Request $request) {
-        $validated = $request->validate([
-            'category_name' => 'required|unique:categories|max:255',
-            
-        ],
-        //This is how you display your own customized error messages
-        [
-            'category_name.required' => 'Please Input Category Name',
-            'category_name.max' => 'Category less than 255 characters',
-            
-        ]);
+    public function AddCat(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'category_name' => 'required|unique:categories|max:255',
+
+            ],
+            //This is how you display your own customized error messages
+            [
+                'category_name.required' => 'Please Input Category Name',
+                'category_name.max' => 'Category less than 255 characters',
+
+            ]
+        );
 
         //First method for Eloquent ORM
 
         Category::insert([
-           'category_name' => $request->category_name,     //Gets the request as category_name, which is the name of our input field
-           'user_id' => Auth::user()->id,                  //Gets the id of the authenticated user
-           'created_at' => Carbon::now()                   
+            'category_name' => $request->category_name,     //Gets the request as category_name, which is the name of our input field
+            'user_id' => Auth::user()->id,                  //Gets the id of the authenticated user
+            'created_at' => Carbon::now()
         ]);
 
         //Second method for Eloquent ORM
@@ -72,7 +75,8 @@ class CategoryController extends Controller
         return Redirect()->back()->with('success', 'Category Inserted Successfully');
     }
 
-    public function Edit($id) {
+    public function Edit($id)
+    {
         //Eloquent ORM
         // $categories = Category::find($id);
 
@@ -82,7 +86,8 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('categories'));
     }
 
-    public function Update(Request $request,$id) {
+    public function Update(Request $request, $id)
+    {
         // Eloquent ORM
         // $update = Category::find($id)->update([
         //     'category_name' => $request->category_name,
@@ -97,17 +102,20 @@ class CategoryController extends Controller
         return Redirect()->route('all.category')->with('success', 'Category Updated Successfully');
     }
 
-    public function SoftDelete($id) {
+    public function SoftDelete($id)
+    {
         $delete = Category::find($id)->delete();
         return Redirect()->back()->with('success', 'Category Moved To Trash Successfully');
     }
 
-    public function Restore($id) {
+    public function Restore($id)
+    {
         $delete = Category::withTrashed()->find($id)->restore();
         return Redirect()->back()->with('success', 'Category Restored Successfully');
     }
 
-    public function Delete($id) {
+    public function Delete($id)
+    {
         $delete = Category::onlyTrashed()->find($id)->forceDelete();
         return Redirect()->back()->with('success', 'Category Deleted Successfully');
     }

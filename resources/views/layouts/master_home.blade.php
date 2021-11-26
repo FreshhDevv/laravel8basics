@@ -50,7 +50,7 @@
 
   @include('layouts.body.footer')
 
-  
+
 
   <!-- Vendor JS Files -->
   <script src="{{asset('frontend/assets/vendor/jquery/jquery.min.js')}}"></script>

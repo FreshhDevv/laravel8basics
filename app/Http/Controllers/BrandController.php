@@ -17,7 +17,6 @@ class BrandController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        
     }
 
     public function AllBrand()
@@ -153,7 +152,8 @@ class BrandController extends Controller
         return Redirect()->back()->with('success', 'Brand Inserted Successfully');
     }
 
-    public function Logout() {
+    public function Logout()
+    {
         Auth::logout();
         return Redirect()->route('login')->with('success', 'User Logout');
     }

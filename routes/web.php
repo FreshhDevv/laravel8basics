@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AboutController;
 use App\Models\Multipic;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,10 @@ Route::get('/slider/edit/{id}', [HomeController::class, 'Edit']);
 Route::post('/slider/update/{id}', [HomeController::class, 'Update']);
 
 Route::get('slider/delete/{id}', [HomeController::class, 'Delete']);
+
+// Home About Routes
+Route::get('/home/about', [AboutController::class, 'HomeAbout'])->name('home.about');
+
 
 
 

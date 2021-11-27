@@ -99,6 +99,12 @@ Route::get('/add/About', [AboutController::class, 'AddAbout'])->name('add.about'
 
 Route::post('/store/about', [AboutController::class, 'StoreAbout'])->name('store.about'); 
 
+Route::get('/about/edit/{id}', [AboutController::class, 'EditAbout']);
+
+Route::post('/about/update/{id}', [AboutController::class, 'UpdateAbout']);
+
+Route::get('/about/delete/{id}', [AboutController::class, 'DeleteAbout']);
+
 
 
 

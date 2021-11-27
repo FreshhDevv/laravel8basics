@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HomeAbout;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Redirect;
 
 class AboutController extends Controller
 {
@@ -26,5 +27,26 @@ class AboutController extends Controller
         ]);
 
         return Redirect()->route('home.about')->with('success', 'About Inserted Successfully');
+    }
+
+    public function EditAbout($id) {
+        $abouts = HomeAbout::find($id);
+        return view('admin.home.edit', compact('abouts'));
+    }
+
+    public function UpdateAbout(Request $request, $id) {
+        HomeAbout::find($id)->update([
+            'title' => $request->title,
+            'short_description' => $request->short_description,
+            'long_description' => $request->long_description,
+            'created_at' => now()
+        ]);
+        return Redirect()->route('home.about')->with('success', 'About Updated Successfully');
+
+    }
+
+    public function DeleteAbout($id) {
+        HomeAbout::find($id)->delete();
+        return Redirect()->route('home.about')->with('success', 'About Deleted Successfully');
     }
 }

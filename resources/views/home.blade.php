@@ -2,7 +2,7 @@
 
 @section('home_content')
 
-@php
+
 
 
 <!-- ======= About Us Section ======= -->

@@ -2,72 +2,42 @@
 
 @section('admin')
 
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>{{session('success')}}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-@endif
+<div class="col-lg-12">
+    <div class="card card-default">
+        <div class="card-header card-header-border-bottom">
+            <h2>Edit About</h2>
+        </div>
+        <div class="card-body">
+            <form action="{{ url('update/about/'.$abouts->id) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">About Title</label>
+                    <input type="text" name="title" class="form-control" id="exampleFormControlInput1" value="{{ $abouts->title }}">
 
-<div class="py-12">
-
-    <div class="container">
-        <div class="row">
-
-
-
-
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Edit About</div>
-                    <div class="card-body">
-                        <form action="{{ url('about/update/'.$abouts->id) }}" method="POST">
-                            @csrf
-                            
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="form-label">Update About Title</label>
-                                <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $abouts->title }}">
-
-                                @error('title')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="form-label">Update About Short Description</label>
-                                
-                                <input type="text" name="short_description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $abouts->short_description }}">
-
-                                @error('short_description')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputEmail1" class="form-label">Update About Long Description</label>
-                                <input type="text" name="long_description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $abouts-> long_description }}">
-
-                                @error('long_description')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-
-                            </div>
-
-                            
-                            <div class="form-group">
-
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Update About</button>
-                        </form>
-                    </div>
                 </div>
-            </div>
+
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Short Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="short_description" >{{ $abouts->short_description }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Long Description</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="long_description">{{ $abouts->long_description }}</textarea>
+                </div>
+               
+                <div class="form-footer pt-4 pt-5 mt-4 border-top">
+                    <button type="submit" class="btn btn-primary btn-default">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 
 
+
+
 </div>
+
 @endsection

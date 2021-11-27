@@ -4,9 +4,6 @@
 
 @php
 
-$abouts = DB::table('home_abouts')->get();
-
-@endphp
 
 <!-- ======= About Us Section ======= -->
 <section id="about-us" class="about-us">
@@ -17,26 +14,22 @@ $abouts = DB::table('home_abouts')->get();
       <h2>About Us</strong></h2>
     </div>
 
-    @foreach($abouts as $about)
+    
     <div class="row content">
       <div class="col-lg-6" data-aos="fade-right">
-        <h2>{{ $about->title }}</h2>
-        <h3>{{ $about->short_description }}</h3>
+        <h2>{{ $abouts->title }}</h2>
+        <h3>{{ $abouts->short_description }}</h3>
       </div>
       <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left">
         <p>
-          {{ $about->long_description }}
+          {{ $abouts->long_description }}
         </p>
         <br><br>
-        <!-- <ul>
-          <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
-          <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-          <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
-        </ul> -->
+        
         
       </div>
     </div>
-  @endforeach
+  
 
   </div>
 </section><!-- End About Us Section -->

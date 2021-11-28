@@ -117,6 +117,10 @@ Route::get('/portfolio', [AboutController::class, 'Portfolio'])->name('portfolio
 
 Route::get('/admin/contact', [ContactController::class, 'AdminContact'])->name('admin.contact');
 
+Route::get('/admin/add/contact', [ContactController::class, 'AdminAddContact'])->name('add.contact');
+
+Route::post('/admin/store/contact', [ContactController::class, 'AdminStoreContact'])->name('store.contact');
+
 
 
 

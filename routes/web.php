@@ -27,9 +27,13 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/', function () {
+    ///Query builder
     $brands = DB::table('brands')->get();
     $abouts = DB::table('home_abouts')->first();
-    return view('home', compact('brands', 'abouts'));
+    //Eloquent orm
+    $images = Multipic::all();
+
+    return view('home', compact('brands', 'abouts', 'images'));
 });
 
 Route::get('/home', function () {

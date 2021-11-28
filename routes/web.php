@@ -113,6 +113,10 @@ Route::get('/delete/about/{id}', [AboutController::class, 'DeleteAbout']);
 //Portfolio Page Routes
 Route::get('/portfolio', [AboutController::class, 'Portfolio'])->name('portfolio');
 
+//Admin Contact Page
+
+Route::get('/admin/contact', [ContactController::class, 'AdminContact'])->name('admin.contact');
+
 
 
 

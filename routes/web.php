@@ -110,6 +110,9 @@ Route::post('/update/about/{id}', [AboutController::class, 'UpdateAbout']);
 
 Route::get('/delete/about/{id}', [AboutController::class, 'DeleteAbout']);
 
+//Portfolio Page Routes
+Route::get('/portfolio', [AboutController::class, 'Portfolio'])->name('portfolio');
+
 
 
 

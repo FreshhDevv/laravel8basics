@@ -135,7 +135,7 @@ Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('c
 
 Route::get('/admin/message', [ContactController::class, 'AdminMessage'])->name('admin.message');
 
-Route::get('/message/delete/{id}', ContactController::class, 'AdminDeleteMessage');
+Route::get('/message/delete/{id}', [ContactController::class, 'AdminDeleteMessage']);
 
 
 

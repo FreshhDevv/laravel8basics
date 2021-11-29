@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ChangePassword;
 use App\Models\Multipic;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -150,3 +151,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/user/logout', [BrandController::class, 'Logout'])->name('user.logout');
+
+//Change Password and User Profile
+
+Route::get('/user/password', [ChangePassword::class, 'ChangePassword'])->name('change.password');

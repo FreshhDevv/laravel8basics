@@ -29,7 +29,13 @@ class ContactController extends Controller
             'address'=> $request->address,
             'created_at'=> Carbon::now()
         ]);
-        return Redirect()->route('admin.contact')->with('success', 'Contact Inserted Successfully');
+
+        $notification = array(
+            'message' => 'Contact Inserted Successfully',
+            'alert-type' => 'info'
+        );
+
+        return Redirect()->route('admin.contact')->with($notification);
     }
 
     public function AdminEditContact($id) {
@@ -44,12 +50,22 @@ class ContactController extends Controller
             'address'=>$request->address,
             'created_at'=> Carbon::now()
         ]);
-        Return redirect()->route('admin.contact')->with('success', 'Contact Updated Successfully');
+
+        $notification = array(
+            'message' => 'Contact Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        Return redirect()->route('admin.contact')->with($notification);
     }
 
     public function AdminDeleteContact($id) {
         Contact::find($id)->delete();
-        return redirect()->route('admin.contact')->with('success', 'Contact Deleted Successfully');
+        $notification = array(
+            'message' => 'Contact Deleted Successfully',
+            'alert-type' => 'error'
+        );
+        return redirect()->route('admin.contact')->with($notification);
     }
 
     public function Contact() {
@@ -65,7 +81,13 @@ class ContactController extends Controller
             'message' => $request->message,
             'created_at' => Carbon::now()
         ]);
-        return Redirect()->route('contact')->with('success', 'Message sent successfully');
+
+        $notification = array(
+            'message' => 'Message sent successfully',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('contact')->with($notification);
     }
 
     public function AdminMessage() {
@@ -75,6 +97,12 @@ class ContactController extends Controller
 
     public function AdminDeleteMessage($id) {
         Contactform::find($id)->delete();
-        return redirect()->route('admin.message')->with('success', 'Message Successfully Deleted');
+
+        $notification = array(
+            'message' => 'Message Successfully Deleted',
+            'alert-type' => 'error'
+        );
+
+        return redirect()->route('admin.message')->with($notification);
     }
 }

@@ -31,9 +31,21 @@ class ChangePassword extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();
-            return redirect()->route('login')->with('success', 'Password Changed Successfully');
+
+            $notification = array(
+                'message' => 'Password Changed Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('login')->with($notification);
         } else {
-            return redirect()->back()->with('error', 'Current Password is Invalid');
+
+            $notification = array(
+                'message' => 'Current Password is Invalid',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
         }
     }
 
@@ -58,9 +70,9 @@ class ChangePassword extends Controller
 
            
 
-            $name_gen = hexdec(uniqid()) . '.' . $profile_photo->getClientOriginalExtension();
-            Image::make($profile_photo)->resize(300, 200)->save('storage/profile-photos/' . $name_gen);
-            $last_img = 'storage/profile-photos/' . $name_gen;
+            //$name_gen = hexdec(uniqid()) . '.' . $profile_photo->getClientOriginalExtension();
+            Image::make($profile_photo)->resize(300, 200)->save('storage/profile-photos/');
+            $last_img = 'storage/profile-photos/';
 
             unlink($old_image);
             $user = User::find(Auth::user()->id);
@@ -70,7 +82,13 @@ class ChangePassword extends Controller
                 $user->profile_photo = $last_img;
                 
                 $user->save();
-                return Redirect()->back()->with('success', 'User profile updated successfully');
+
+                $notification = array(
+                    'message' => 'User profile updated successfully',
+                    'alert-type' => 'success'
+                );
+
+                return Redirect()->back()->with($notification);
             } else {
                 return Redirect()->back();
             }

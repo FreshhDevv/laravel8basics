@@ -58,6 +58,11 @@ class CategoryController extends Controller
             'created_at' => Carbon::now()
         ]);
 
+        $notification = array(
+            'message' => 'Category Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
         //Second method for Eloquent ORM
 
         // $category = new Category;                           //Creating a new object for our category model
@@ -72,7 +77,7 @@ class CategoryController extends Controller
         // $data['user_id'] = Auth::user()->id;
         // DB::table('categories')->insert($data);
 
-        return Redirect()->back()->with('success', 'Category Inserted Successfully');
+        return Redirect()->back()->with($notification);
     }
 
     public function Edit($id)
@@ -99,24 +104,49 @@ class CategoryController extends Controller
         $data['category_name'] = $request->category_name;
         $data['user_id'] = Auth::user()->id;
         DB::table('categories')->where('id', $id)->update($data);
-        return Redirect()->route('all.category')->with('success', 'Category Updated Successfully');
+
+        $notification = array(
+            'message' => 'Category Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+
+        return Redirect()->route('all.category')->with($notification);
     }
 
     public function SoftDelete($id)
     {
         $delete = Category::find($id)->delete();
-        return Redirect()->back()->with('success', 'Category Moved To Trash Successfully');
+
+        $notification = array(
+            'message' => 'Category Moved To Trash Successfully',
+            'alert-type' => 'info'
+        );
+
+        return Redirect()->back()->with($notification);
     }
 
     public function Restore($id)
     {
         $delete = Category::withTrashed()->find($id)->restore();
+
+        $notification = array(
+            'message' => 'Category Restored Successfully',
+            'alert-type' => 'success'
+        );
+
         return Redirect()->back()->with('success', 'Category Restored Successfully');
     }
 
     public function Delete($id)
     {
         $delete = Category::onlyTrashed()->find($id)->forceDelete();
-        return Redirect()->back()->with('success', 'Category Deleted Successfully');
+
+        $notification = array(
+            'message' => 'Category Deleted Successfully',
+            'alert-type' => 'error'
+        );
+
+        return Redirect()->back()->with($notification);
     }
 }

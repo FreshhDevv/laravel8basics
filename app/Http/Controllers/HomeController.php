@@ -36,7 +36,12 @@ class HomeController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        return Redirect()->route('home.slider')->with('success', 'Slider Inserted Successfully');
+        $notification = array(
+            'message' => 'Slider Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('home.slider')->with($notification);
     }
 
     public function Edit($id)
@@ -80,7 +85,13 @@ class HomeController extends Controller
                 'image' => $last_img,
                 'created_at' => Carbon::now()
             ]);
-            return Redirect()->route('home.slider')->with('success', 'Slider Updated Successfully');
+
+            $notification = array(
+                'message' => 'Slider Updated Successfully',
+                'alert-type' => 'info'
+            );
+
+            return Redirect()->route('home.slider')->with($notification);
 
             //Else if no new image is selected, update just the brand name.
         } else {
@@ -90,7 +101,11 @@ class HomeController extends Controller
 
                 'created_at' => Carbon::now()
             ]);
-            return Redirect()->route('home.slider')->with('success', 'Slider Updated Successfully');
+            $notification = array(
+                'message' => 'Slider Updated Successfully',
+                'alert-type' => 'info'
+            );
+            return Redirect()->route('home.slider')->with($notification);
         }
     }
 
@@ -101,7 +116,13 @@ class HomeController extends Controller
         unlink($old_image);
 
         Slider::find($id)->delete();
-        return Redirect()->route('home.slider')->with('success', 'Slider Deleted Successfully');
+
+        $notification = array(
+            'message' => 'Slider Deleted Successfully',
+            'alert-type' => 'error'
+        );
+
+        return Redirect()->route('home.slider')->with($notification);
     }
 
 }

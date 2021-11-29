@@ -8,19 +8,31 @@
         <h2>Change Password</h2>
     </div>
     <div class="card-body">
-        <form class="form-pill">
+        <form method="POST" action="{{ route('password.update') }}" class="form-pill">
+            <!-- If the csrf token is not added to the form, the data won't be saved in the databse. -->
+            @csrf
             <div class="form-group">
                 <label for="exampleFormControlInput3">Current Password</label>
-                <input type="password" class="form-control" id="exampleFormControlInput3" placeholder="Current Password">
+                <input type="password" name="oldpassword" class="form-control" id="current_password" placeholder="Current Password">
+                @error('oldpassword')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
+            
             <div class="form-group">
                 <label for="exampleFormControlPassword3">New Password</label>
-                <input type="password" class="form-control" id="exampleFormControlPassword3" placeholder="New Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="New Password">
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlPassword3">Confirm Password</label>
-                <input type="password" class="form-control" id="exampleFormControlPassword3" placeholder="Confirm Password">
+                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm Password">
+                @error('password_confirmation')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary btn-default">Save</button>

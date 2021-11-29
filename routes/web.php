@@ -127,6 +127,16 @@ Route::post('/update/contact/{id}', [ContactController::class, 'AdminUpdateConta
 
 Route::get('/contact/delete/{id}', [ContactController::class, 'AdminDeleteContact']);
 
+//Home Contact Page Route
+
+Route::get('/contact', [ContactController::class, 'Contact'])->name('contact');
+
+Route::post('/contact/form', [ContactController::class, 'ContactForm'])->name('contact.form');
+
+Route::get('/admin/message', [ContactController::class, 'AdminMessage'])->name('admin.message');
+
+Route::get('/message/delete/{id}', ContactController::class, 'AdminDeleteMessage');
+
 
 
 

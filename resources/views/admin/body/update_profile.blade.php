@@ -12,7 +12,7 @@
         <form method="POST" action="{{ route('update.user.profile') }}" class="form-pill" enctype="multipart/form-data">
             <!-- If the csrf token is not added to the form, the data won't be saved in the databse. -->
             @csrf
-            <input type="hidden" name="old_image" value="{{ $user -> profile_photo_path}} ">
+            
             <div class="form-group">
                 <label for="exampleFormControlInput3">User Name</label>
                 <input type="text" name="name" class="form-control" value="{{ $user['name'] }}">
@@ -26,15 +26,15 @@
             </div>
 
             <div class="form-group">
-                <label for="exampleInputEmail1" class="form-label">Update Brand Image</label>
-                <input type="file" name="profile_photo_path" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $user->profile_photo }}">
+                <label for="exampleInputEmail1" class="form-label">Update Profile Photo</label>
+                <input type="file" name="profile_photo_path" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $user['profile_photo_path'] }}">
 
                 @error('profile_photo')
                 <span class="text-danger">{{$message}}</span>
                 @enderror
 
             </div class="form-group">
-            <img src="{{ Auth::user()->profile_photo_url }}" style="width: 400px; height: 200px;">
+            <img src="{{ url('upload/user_images/'.$user->profile_photo_path) }}" style = "width: 400px; height: 200px;" class="user-image" alt="User Image" />
             <br><br>
 
 

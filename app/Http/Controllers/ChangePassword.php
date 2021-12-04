@@ -58,43 +58,30 @@ class ChangePassword extends Controller
         }
     }
 
-    public function UpdateProfile(Request $request) {
-        $old_image = $request->old_image;
-
-        
-
-        $profile_photo = $request->file('profile_photo_path');
-
-        //If a new image is selected, update the brand name and the image.
-        if ($profile_photo) {
-
-           
-
-            //$name_gen = hexdec(uniqid()) . '.' . $profile_photo->getClientOriginalExtension();
-            Image::make($profile_photo)->resize(300, 200)->save('storage/profile-photos/');
-            $last_img = 'storage/profile-photos/';
-
-            unlink($old_image);
-            $user = User::find(Auth::user()->id);
-            if($user) {
-                $user->name = $request['name'];
-                $user->email = $request['email'];
-                $user->profile_photo = $last_img;
-                
-                $user->save();
-
-                $notification = array(
-                    'message' => 'User profile updated successfully',
-                    'alert-type' => 'success'
-                );
-
-                return Redirect()->back()->with($notification);
-            } else {
-                return Redirect()->back();
-            }
-            
-        
+        public function UpdateProfile(Request $request) {
+ 
+            $id = Auth::user()->id;
+           $data = User::find($id);
+           $data->name = $request->name;
+           $data->email = $request->email;
     
-        }
-    }
+    
+           if ($request->file('profile_photo_path')) {
+               $file = $request->file('profile_photo_path');
+               
+               $filename = date('YmdHi').$file->getClientOriginalName();
+               $file->move(public_path('upload/user_images'),$filename);
+               $data['profile_photo_path'] = $filename;
+           }
+           $data->save();
+    
+           $notification = array(
+               'message' => 'User Profile Updated Successfully',
+               'alert-type' => 'success'
+           );
+    
+           return redirect()->back()->with($notification);
+    
+         } // end method 
+    
 }

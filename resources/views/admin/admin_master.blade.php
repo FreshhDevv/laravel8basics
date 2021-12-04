@@ -61,6 +61,13 @@
         -->
     @include('admin.body.sidebar')
 
+    
+
+
+    @php
+    $id = Auth::user()->id;
+    $user = App\Models\User::find($id);
+@endphp
 
 
     <div class="page-wrapper">
@@ -138,13 +145,22 @@
               <!-- User Account -->
               <li class="dropdown user-menu">
                 <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+
+                    @php
+                    $id = Auth::user()->id;
+                    $user = App\Models\User::find($id);
+                    @endphp
+
                   <img src="{{ Auth::user()->profile_photo_url }}" class="user-image" alt="User Image" />
                   <span class="d-none d-lg-inline-block">{{ Auth::user()->name }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <!-- User image -->
                   <li class="dropdown-header">
-                    <img src="{{ Auth::user()->profile_photo_url }}" class="img-circle" alt="User Image" />
+
+ 
+                    
+                    <img src="{{ url('upload/user_images/'.$user->profile_photo_path) }}" class="user-image" alt="User Image" />
                     <div class="d-inline-block">
                     {{ Auth::user()->name }} <small class="pt-1">{{ Auth::user()->email }}</small>
                     </div>

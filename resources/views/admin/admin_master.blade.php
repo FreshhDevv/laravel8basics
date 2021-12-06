@@ -64,10 +64,7 @@
     
 
 
-    @php
-    $id = Auth::user()->id;
-    $user = App\Models\User::find($id);
-@endphp
+    
 
 
     <div class="page-wrapper">
@@ -151,7 +148,8 @@
                     $user = App\Models\User::find($id);
                     @endphp
 
-                  <img src="{{ Auth::user()->profile_photo_url }}" class="user-image" alt="User Image" />
+                  
+                  <img src="{{ url('upload/user_images/'.$user->profile_photo_path) }}" class="user-image" alt="User Image" />
                   <span class="d-none d-lg-inline-block">{{ Auth::user()->name }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">

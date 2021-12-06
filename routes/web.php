@@ -145,8 +145,6 @@ Route::get('/message/delete/{id}', [ContactController::class, 'AdminDeleteMessag
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    // $users = User::all();
-    // $users = DB::table('users')->get();
     return view('admin.index');
 })->name('dashboard');
 
